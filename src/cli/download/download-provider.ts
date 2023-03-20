@@ -110,7 +110,7 @@ export class DownloadProvider extends FlywayCliProvider {
 
         // Determine char for split method from path, otherwise it doesn't work on a windows dev environment
         let splitChar = '/';
-        if (files[0].path.contains("\\")) { 
+        if (files[0].path.indexOf("\\") >= 0) { 
             splitChar = '\\';
         }
 
