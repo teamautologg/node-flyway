@@ -107,7 +107,14 @@ export class DownloadProvider extends FlywayCliProvider {
         if(files.length == 0) {
             throw new Error("Weird. Expected some files to be extracted.");
         }
-        return path.join(outerDirectory, files[0].path.split(path.sep)[0]);
+
+        // Determine char for split method from path, otherwise it doesn't work on a windows dev environment
+        let splitChar = '/';
+        if (files[0].path.contains("\\")) { 
+            splitChar = '\\';
+        }
+
+        return path.join(outerDirectory, files[0].path.split(splitChar)[0]);
     }
 
     private async decompressFiles(
